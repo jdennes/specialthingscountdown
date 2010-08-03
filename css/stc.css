@@ -1,0 +1,22 @@
+body { font-size: 14px; color: #5c5c5c; background-color: #111111; font-family: helvetica, arial, sans-serif; margin: 0; height: 100%; }
+a:link, a:visited { color: #3D3D3D  ; text-decoration: underline; }
+a:hover, a:focus { text-decoration: none; background: #231F1F; color: #ffffff; }
+p { margin: 0px; }
+div#container { margin: 0 auto; width: 680px; overflow: hidden; position: relative; }
+.clear { clear: both; float: none !important; }
+.pink { color: #ff1170; }
+.blue { color: #2fc2ef; }
+.yell { color: #fef200; }
+div#specialthingsdata { display: none; }
+div#daycount { font-size: 300px; line-height: 300px; font-weight: bold; float: left; }
+div#daysuntil { font-size: 140px; font-weight: bold; line-height: 140px; }
+div#specialthing { font-size: 48px; letter-spacing: -3px; }
+div#next { float: right; }
+div#footer { font-size: 18px; margin-top: 18px; }
+div#love { height: 26px; float: right; text-align: right; }
+div#love a:link, div#love a:visited { text-decoration: none; background: #111111; color: #ff1170; }
+div#love a:hover, div#love a:focus { text-decoration: none; background: #111111; color: #ff1170; text-shadow: 0 0 0.5em #ff1170; }
+a.pinkbutton { color:#fff; border: 1px solid #880036; background: none repeat scroll 0 0 #ff1170; text-decoration: none; padding: 3px 6px; -moz-border-radius: 2px; border-radius: 2px; -webkit-border-radius:2px; }
+a.pinkbutton:hover { background: none repeat scroll 0 0 #cc0051; text-decoration: none; }
+textarea { margin-bottom: 10px; width: 100%; height: 30px; font-size: 14px; color: #5c5c5c; font-family: helvetica, arial, sans-serif; padding: 3px; }
+div#message { display: none; float: right; text-align: right; }
