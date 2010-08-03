@@ -19,6 +19,10 @@ var showMessage = function(message) {
 };
 
 var addSpecialThing = function() {
+  if ($("#newthing").val().trim() == "") {
+    showMessage("Your new special thing can't be empty!");
+    return;
+  }
   var new_thing = $("#newthing").val();
   $.post("/add", $("#addform").serialize(),
     function(data) {
