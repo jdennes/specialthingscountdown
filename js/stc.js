@@ -37,14 +37,20 @@ var addSpecialThing = function() {
 $(document).ready(function() {
   special_things = JSON.parse($("#specialthingsdata").html());
   current_index = getRandomInt(0, special_things.length - 1);
-  $("#specialthing").html(special_things[current_index]);
+  if (special_things.length > 0) {
+    $("#specialthing").html(special_things[current_index].thing);
+    $("#specialthingadded").html(special_things[current_index].added);
+  }
   $("div#next a").click(function() {
     if (current_index == special_things.length - 1) { 
       current_index = 0;
     } else {
       current_index += 1;
     }
-    $("#specialthing").html(special_things[current_index]);
+    if (special_things.length > 0) {
+      $("#specialthing").html(special_things[current_index].thing);
+      $("#specialthingadded").html(special_things[current_index].added);
+    }
   });
   $("div#add a").click(function() { addSpecialThing(); });
 });

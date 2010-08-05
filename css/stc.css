@@ -11,6 +11,7 @@ div#specialthingsdata { display: none; }
 div#daycount { font-size: 300px; line-height: 300px; font-weight: bold; float: left; }
 div#daysuntil { font-size: 140px; font-weight: bold; line-height: 140px; }
 div#specialthing { font-size: 48px; letter-spacing: -3px; }
+div#specialthingadded { font-size: 12px; text-align: right; }
 div#next { float: right; }
 div#footer { font-size: 18px; margin-top: 18px; }
 div#love { height: 26px; float: right; text-align: right; }

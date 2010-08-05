@@ -8,6 +8,8 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util, template
 from models import SpecialThing, TrustedUser
 
+APP_VERSION = 1
+
 def get_trusted_users():
   return [u.user.email() for u in TrustedUser.all()]
 
@@ -23,10 +25,11 @@ class MainHandler(webapp.RequestHandler):
     if user and is_trusted_user(user):
       special_day = datetime(year=2010, month=9, day=24)
       days = (special_day - datetime.utcnow()).days
-      special_things = [t.thing for t in get_special_things()]
+      special_things = [{"thing": t.thing, "added": t.added()} for t in get_special_things()]
       path = os.path.join(os.path.dirname(__file__), 'index.html')
       self.response.out.write(template.render(path, 
-        { 'days': days, 'special_things': simplejson.dumps(special_things) }))
+        { 'version': APP_VERSION, 'days': days, 
+        'special_things': simplejson.dumps(special_things) }))
     else:
       path = os.path.join(os.path.dirname(__file__), 'notallowed.html')
       self.response.out.write(template.render(path, {}))
@@ -54,7 +57,7 @@ class ThingsHandler(webapp.RequestHandler):
     user = users.get_current_user()
     if user and is_trusted_user(user):
       self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
-      special_things = [t.thing for t in get_special_things()]
+      special_things = [{"thing": t.thing, "added": t.added()} for t in get_special_things()]
       self.response.out.write(simplejson.dumps(special_things))
     else:
       self.redirect("/")

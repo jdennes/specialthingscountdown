@@ -4,10 +4,10 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
     <title>special things countdown</title>
-    <link rel="stylesheet" href="/css/stc.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="/css/stc.css?{{version}}" type="text/css" media="screen" />
     <script type="text/javascript"
       src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/stc.js"></script>
+    <script type="text/javascript" src="/js/stc.js?{{version}}"></script>
   </head>
   <body>
     <div id="container">
@@ -16,6 +16,7 @@
       <div class="clear"></div>
       <div id="next"><a class="pinkbutton" href="#">next &rsaquo;</a></div>
       <div id="specialthing"></div>
+      <div id="specialthingadded"></div>
       <div id="specialthingsdata">{{ special_things }}</div>
       <div style="margin: 20px 0 2px">Add a new special thing by entering it below!</div>
       <form id="addform"><textarea id="newthing" name="newthing"></textarea></form>
