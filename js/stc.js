@@ -9,6 +9,9 @@ var refreshSpecialThings = function() {
   $.get("/things", function(data) {
     special_things = data;
     $("#specialthingsdata").html(JSON.stringify(special_things));
+    current_index = 0;
+    $("#specialthing").html(special_things[current_index].thing);
+    $("#specialthingadded").html(special_things[current_index].added);
   }, "json");
 };
 
@@ -34,23 +37,38 @@ var addSpecialThing = function() {
     });
 };
 
-$(document).ready(function() {
-  special_things = JSON.parse($("#specialthingsdata").html());
-  current_index = getRandomInt(0, special_things.length - 1);
+var forward = function() {
+  if (current_index == special_things.length - 1) { 
+    current_index = 0;
+  } else {
+    current_index += 1;
+  }
   if (special_things.length > 0) {
     $("#specialthing").html(special_things[current_index].thing);
     $("#specialthingadded").html(special_things[current_index].added);
   }
-  $("div#next a").click(function() {
-    if (current_index == special_things.length - 1) { 
-      current_index = 0;
-    } else {
-      current_index += 1;
-    }
-    if (special_things.length > 0) {
-      $("#specialthing").html(special_things[current_index].thing);
-      $("#specialthingadded").html(special_things[current_index].added);
-    }
-  });
+};
+
+var back = function() {
+  if (current_index == 0) { 
+    current_index = special_things.length - 1;
+  } else {
+    current_index -= 1;
+  }
+  if (special_things.length > 0) {
+    $("#specialthing").html(special_things[current_index].thing);
+    $("#specialthingadded").html(special_things[current_index].added);
+  }
+};
+
+$(document).ready(function() {
+  special_things = JSON.parse($("#specialthingsdata").html());
+  current_index = 0;
+  if (special_things.length > 0) {
+    $("#specialthing").html(special_things[current_index].thing);
+    $("#specialthingadded").html(special_things[current_index].added);
+  }
+  $("div#forward a").click(function() { forward(); });
+  $("div#back a").click(function() { back(); });
   $("div#add a").click(function() { addSpecialThing(); });
 });

@@ -8,7 +8,7 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util, template
 from models import SpecialThing, TrustedUser
 
-APP_VERSION = 1
+MEDIA_VERSION = 2
 
 def get_trusted_users():
   return [u.user.email() for u in TrustedUser.all()]
@@ -17,7 +17,7 @@ def is_trusted_user(user):
   return (user.email() in get_trusted_users())
 
 def get_special_things():
-  return [t for t in SpecialThing.all()]
+  return [t for t in SpecialThing.all().order('-date_added')]
 
 class MainHandler(webapp.RequestHandler):
   def get(self):
@@ -28,7 +28,7 @@ class MainHandler(webapp.RequestHandler):
       special_things = [{"thing": t.thing, "added": t.added()} for t in get_special_things()]
       path = os.path.join(os.path.dirname(__file__), 'index.html')
       self.response.out.write(template.render(path, 
-        { 'version': APP_VERSION, 'days': days, 
+        { 'version': MEDIA_VERSION, 'days': days, 
         'special_things': simplejson.dumps(special_things) }))
     else:
       path = os.path.join(os.path.dirname(__file__), 'notallowed.html')
