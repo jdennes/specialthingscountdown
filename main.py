@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import cgi
 import logging
 import sys, os
 from datetime import datetime
@@ -25,7 +26,7 @@ class MainHandler(webapp.RequestHandler):
     user = users.get_current_user()
     if user and is_trusted_user(user):
       days = (SPECIAL_DAY - datetime.utcnow()).days
-      special_things = [{"thing": t.thing, "added": t.added()} for t in get_special_things()]
+      special_things = [{"thing": cgi.escape(t.thing), "added": t.added()} for t in get_special_things()]
       path = os.path.join(os.path.dirname(__file__), 'index.html')
       self.response.out.write(template.render(path, 
         { 'version': MEDIA_VERSION, 'days': days, 
@@ -57,7 +58,7 @@ class ThingsHandler(webapp.RequestHandler):
     user = users.get_current_user()
     if user and is_trusted_user(user):
       self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
-      special_things = [{"thing": t.thing, "added": t.added()} for t in get_special_things()]
+      special_things = [{"thing": cgi.escape(t.thing), "added": t.added()} for t in get_special_things()]
       self.response.out.write(simplejson.dumps(special_things))
     else:
       self.redirect("/")
