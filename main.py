@@ -8,7 +8,8 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util, template
 from models import SpecialThing, TrustedUser
 
-MEDIA_VERSION = 2
+MEDIA_VERSION = 3
+SPECIAL_DAY = datetime(year=2010, month=9, day=24)
 
 def get_trusted_users():
   return [u.user.email() for u in TrustedUser.all()]
@@ -23,8 +24,7 @@ class MainHandler(webapp.RequestHandler):
   def get(self):
     user = users.get_current_user()
     if user and is_trusted_user(user):
-      special_day = datetime(year=2010, month=9, day=24)
-      days = (special_day - datetime.utcnow()).days
+      days = (SPECIAL_DAY - datetime.utcnow()).days
       special_things = [{"thing": t.thing, "added": t.added()} for t in get_special_things()]
       path = os.path.join(os.path.dirname(__file__), 'index.html')
       self.response.out.write(template.render(path, 

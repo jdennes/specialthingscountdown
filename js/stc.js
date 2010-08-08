@@ -10,8 +10,12 @@ var refreshSpecialThings = function() {
     special_things = data;
     $("#specialthingsdata").html(JSON.stringify(special_things));
     current_index = 0;
-    $("#specialthing").html(special_things[current_index].thing);
-    $("#specialthingadded").html(special_things[current_index].added);
+    if (special_things.length > 0) {
+      $("#specialthing").html(special_things[current_index].thing);
+      $("#specialthingadded").html(special_things[current_index].added);
+    } else {
+      $("#nospecialthings").show();
+    }
   }, "json");
 };
 
@@ -61,13 +65,48 @@ var back = function() {
   }
 };
 
+var populateListView = function() {
+  html = [];
+  $.each(special_things, function(i, item) {
+    html.push("<div>");
+    html.push("<div class=\"special\">" + special_things[i].thing + "</div>");
+    html.push("<div class=\"specialadded pink\">" + special_things[i].added + "</div>");
+    html.push("</div>");
+  });
+  $("#listview").html(html.join(''));
+};
+
+var toggleView = function() {
+  if (special_things.length == 0) {
+    $("#normalview").show();
+    $("#viewtoggle a").html("Show full list");
+    $("#nospecialthings").show();
+    return;
+  }
+  if ($("#normalview").is(":visible")) {
+    // Display list view
+    $("#normalview").hide();
+    populateListView();
+    $("#listview").show();
+    $("#viewtoggle a").html("Hide full list");
+  } else {
+    // Display normal view
+    $("#listview").hide();
+    $("#normalview").show();
+    $("#viewtoggle a").html("Show full list");
+  }
+};
+
 $(document).ready(function() {
   special_things = JSON.parse($("#specialthingsdata").html());
   current_index = 0;
   if (special_things.length > 0) {
     $("#specialthing").html(special_things[current_index].thing);
     $("#specialthingadded").html(special_things[current_index].added);
+  } else {
+    $("#nospecialthings").show();
   }
+  $("div#viewtoggle a").click(function() { toggleView(); });
   $("div#forward a").click(function() { forward(); });
   $("div#back a").click(function() { back(); });
   $("div#add a").click(function() { addSpecialThing(); });

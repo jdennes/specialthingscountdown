@@ -7,11 +7,15 @@ div#container { margin: 0 auto; width: 680px; overflow: hidden; position: relati
 .pink { color: #ff1170; }
 .blue { color: #2fc2ef; }
 .yell { color: #fef200; }
+div#nospecialthings { display: none; font-size: 48px; letter-spacing: -3px; }
 div#specialthingsdata { display: none; }
 div#daycount { font-size: 300px; line-height: 300px; font-weight: bold; float: left; }
 div#daysuntil { font-size: 140px; font-weight: bold; line-height: 140px; }
 div#specialthing { font-size: 48px; letter-spacing: -3px; }
 div#specialthingadded { font-size: 12px; text-align: right; }
+div.special { font-size: 48px; letter-spacing: -3px; margin-top: 10px; }
+div.specialadded { font-size: 12px; text-align: right; }
+div#viewtoggle { margin-top: -30px; float: left; text-align: left; }
 div#forward { float: right; }
 div#footer { font-size: 18px; margin-top: 18px; }
 div#love { height: 26px; float: right; text-align: right; }

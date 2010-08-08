@@ -14,12 +14,17 @@
       <div id="daycount" class="pink">{{ days }}</div>
       <div id="daysuntil">days<br />until:</div>
       <div class="clear"></div>
-      <div>
-        <div id="forward"><a class="pinkbutton" href="#">&raquo;</a></div>
-        <div id="back"><a class="pinkbutton" href="#">&laquo;</a></div>
+      <div id="viewtoggle"><a href="#">See full list</a></div>
+      <div id="listview" style="display: none;">List view...</div>
+      <div id="normalview">
+        <div id="nav">
+          <div id="forward"><a class="pinkbutton" href="#">&raquo;</a></div>
+          <div id="back"><a class="pinkbutton" href="#">&laquo;</a></div>
+        </div>
+        <div id="nospecialthings">It's very sad, because there aren't any special things!</div>
+        <div id="specialthing"></div>
+        <div id="specialthingadded" class="pink"></div>
       </div>
-      <div id="specialthing"></div>
-      <div id="specialthingadded"></div>
       <div id="specialthingsdata">{{ special_things }}</div>
       <div style="margin: 20px 0 2px">Add a new special thing by entering it below!</div>
       <form id="addform"><textarea id="newthing" name="newthing"></textarea></form>
