@@ -36,6 +36,9 @@ var addSpecialThing = function() {
       if (data.status) {
         $("#newthing").val("");
         refreshSpecialThings();
+        if ($("#listview").is(":visible")) {
+          toggleView();
+        }
       }
       showMessage(data.message);
     });
