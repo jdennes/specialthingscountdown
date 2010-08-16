@@ -11,28 +11,21 @@
   </head>
   <body>
     <div id="container">
-      <div id="daycount" class="pink">{{ days }}</div>
-      <div id="daysuntil">days<br />until:</div>
-      <div class="clear"></div>
-      <div id="viewtoggle"><a href="#">Show full list</a></div>
-      <div id="listview" style="display: none;"></div>
-      <div id="normalview">
-        <div id="nav">
-          <div id="forward"><a class="pinkbutton" href="#">&raquo;</a></div>
-          <div id="back"><a class="pinkbutton" href="#">&laquo;</a></div>
-        </div>
-        <div id="nospecialthings">It's very sad, because there aren't any special things!</div>
-        <div id="specialthing"></div>
-        <div id="specialthingadded" class="pink"></div>
-      </div>
-      <div id="specialthingsdata">{{ special_things }}</div>
-      <div style="margin: 20px 0 2px">Add a new special thing by entering it below!</div>
-      <form id="addform"><textarea id="newthing" name="newthing"></textarea></form>
-      <div>
-        <div id="message" class="pink"></div>
-        <div id="add"><a class="pinkbutton" href="#">Add this special thing!</a></div>
-      <div/>
-      <div class="clear"></div>
+      {% if special_days %}
+      <div>Upcoming special days!</div>
+      {% for sd in special_days %}
+      <div>Special day: <a href="/day/{{ sd.key }}">{{ sd.description }}</a></div>
+      {% endfor %}
+      {% else %}
+      <div>It's very sad, because there aren't any upcoming special days... :|</div>
+      {% endif %}
+      
+      {% if past_special_days %}
+      <div>Past special days:</div>
+      {% for psd in past_special_days %}
+      <!-- Each past special day appears here -->
+      {% endfor %}
+      {% endif %}
       <div id="footer">
         <div id="love">made with <a href="http://jdenn.es/" target="_new">&#9829;</a> </div>
         <div>it's all about looking forward to special things! ^_^</div>

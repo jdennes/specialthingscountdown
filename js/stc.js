@@ -5,8 +5,8 @@ var getRandomInt = function(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-var refreshSpecialThings = function() {
-  $.get("/things", function(data) {
+var refreshSpecialThings = function(day_id) {
+  $.get("/day/" + day_id + "/things", function(data) {
     special_things = data;
     $("#specialthingsdata").html(JSON.stringify(special_things));
     current_index = 0;
@@ -30,12 +30,13 @@ var addSpecialThing = function() {
     showMessage("Your new special thing can't be empty!");
     return;
   }
+  var day_id = $("#specialdayid").val();
   var new_thing = $("#newthing").val();
-  $.post("/add", $("#addform").serialize(),
+  $.post("/day/" + day_id + "/add", $("#addform").serialize(),
     function(data) {
       if (data.status) {
         $("#newthing").val("");
-        refreshSpecialThings();
+        refreshSpecialThings(day_id);
         if ($("#listview").is(":visible")) {
           toggleView();
         }

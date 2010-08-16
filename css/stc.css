@@ -9,6 +9,7 @@ div#container { margin: 0 auto; width: 680px; overflow: hidden; position: relati
 .yell { color: #fef200; }
 div#nospecialthings { display: none; font-size: 48px; letter-spacing: -3px; }
 div#specialthingsdata { display: none; }
+div#daypassed { font-size: 80px; font-weight: bold; line-height: 80px; }
 div#daycount { font-size: 300px; line-height: 300px; font-weight: bold; float: left; }
 div#daysuntil { font-size: 140px; font-weight: bold; line-height: 140px; }
 div#specialthing { font-size: 48px; letter-spacing: -3px; }

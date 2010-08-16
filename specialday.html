@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <title>special things countdown</title>
+    <link rel="stylesheet" href="/css/stc.css?{{version}}" type="text/css" media="screen" />
+    <script type="text/javascript"
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/stc.js?{{version}}"></script>
+  </head>
+  <body>
+    <div id="container">
+      <div><a href="/">Back to the full list of special days</a></div>
+      {% if in_past %}
+      <div id="daypassed">This special day was <span class="pink">{{ day }}</span>!</div>
+      <div>The special things for that special day are below!</div>
+      {% else %}
+      <div id="daycount" class="pink">{{ days }}</div>
+      <div id="daysuntil">day{{ days|pluralize }}<br />until:</div>
+      {% endif %}
+      <div class="clear"></div>
+      <div id="viewtoggle"><a href="#">Show full list</a></div>
+      <div id="listview" style="display: none;"></div>
+      <div id="normalview">
+        <div id="nav">
+          <div id="forward"><a class="pinkbutton" href="#">&raquo;</a></div>
+          <div id="back"><a class="pinkbutton" href="#">&laquo;</a></div>
+        </div>
+        <div id="nospecialthings">It's very sad, because there aren't any special things!</div>
+        <div id="specialthing"></div>
+        <div id="specialthingadded" class="pink"></div>
+      </div>
+      <div id="specialthingsdata">{{ special_things }}</div>
+      <div style="margin: 20px 0 2px">Add a new special thing by entering it below!</div>
+      <form id="addform">
+        <input id="specialdayid" name="specialdayid" type="hidden" value="{{ day_id }}" />
+        <textarea id="newthing" name="newthing"></textarea>
+      </form>
+      <div>
+        <div id="message" class="pink"></div>
+        <div id="add"><a class="pinkbutton" href="#">Add this special thing!</a></div>
+      <div/>
+      <div class="clear"></div>
+      <div id="footer">
+        <div id="love">made with <a href="http://jdenn.es/" target="_new">&#9829;</a> </div>
+        <div>it's all about looking forward to special things! ^_^</div>
+      </div>
+    </div>
+  </body>
+</html>
