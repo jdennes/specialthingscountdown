@@ -7,7 +7,17 @@
     <link rel="stylesheet" href="/css/stc.css?{{version}}" type="text/css" media="screen" />
     <script type="text/javascript"
       src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" 
+      src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="/css/jquery-ui-1.8.4.custom.css" type="text/css" media="screen" />
     <script type="text/javascript" src="/js/stc.js?{{version}}"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      $("div#addspecialday a").click(function() { addSpecialDay(); });
+      $("#specialdaydate").datepicker({ dateFormat: "d M, yy", 
+        altField: "#specialdayactualdate", altFormat: "yy-mm-dd" });
+    });
+    </script>
   </head>
   <body>
     <div id="container">
@@ -16,7 +26,7 @@
       {% for sd in special_days %}
       <div class="listdaycount pink">{{ sd.days }}</div>
       <div class="listdaysuntil">day{{ sd.days|pluralize }} until <span class="pink">{{ sd.pretty_date }}</span> when...<br />
-        <a href="/day/{{ sd.key }}">{{ sd.description }}</a>
+        <a href="/day/{{ sd.key }}">{{ sd.description|escape }}</a>
       </div>
       <div class="clear"></div>
       {% endfor %}
@@ -29,11 +39,21 @@
       {% for psd in past_special_days %}
       <div class="listdaycount pink">{{ psd.abs_days }}</div>
       <div class="listdaysuntil">day{{ psd.abs_days|pluralize }} ago on <span class="pink">{{ psd.pretty_date }}</span> when...<br />
-        <a href="/day/{{ psd.key }}">{{ psd.description }}</a>
+        <a href="/day/{{ psd.key }}">{{ psd.description|escape }}</a>
       </div>
       <div class="clear"></div>
       {% endfor %}
       {% endif %}
+      <div style="margin: 20px 0 2px">Add a new special day by entering a description and choosing a date!</div>
+      <form id="addspecialdayform">
+        Description:&nbsp;&nbsp;<input id="specialdaydescription" name="specialdaydescription" type="text" />&nbsp;&nbsp;&nbsp;
+        Date:&nbsp;&nbsp;<input id="specialdaydate" name="specialdaydate" type="text" />
+        <input id="specialdayactualdate" name="specialdayactualdate" type="hidden" />
+      </form>
+      <div>
+        <div id="message" class="pink"></div>
+        <div id="addspecialday"><a class="pinkbutton" href="#">Add this special day!</a></div>
+      </div>
       <div id="footer">
         <div id="love">made with <a href="http://jdenn.es/" target="_new">&#9829;</a> </div>
         <div>It's all about looking forward to special things! ^_^</div>

@@ -8,6 +8,22 @@
     <script type="text/javascript"
       src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript" src="/js/stc.js?{{version}}"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+      special_things = JSON.parse($("#specialthingsdata").html());
+      current_index = 0;
+      if (special_things.length > 0) {
+        $("#specialthing").html(special_things[current_index].thing);
+        $("#specialthingadded").html(special_things[current_index].added);
+      } else {
+        $("#nospecialthings").show();
+      }
+      $("div#viewtoggle a").click(function() { toggleView(); });
+      $("div#forward a").click(function() { forward(); });
+      $("div#back a").click(function() { back(); });
+      $("div#add a").click(function() { addSpecialThing(); });
+    });
+    </script>
   </head>
   <body>
     <div id="container">
@@ -42,7 +58,7 @@
       <div>
         <div id="message" class="pink"></div>
         <div id="add"><a class="pinkbutton" href="#">Add this special thing!</a></div>
-      <div/>
+      </div>
       {% endif %}
       <div class="clear"></div>
       <div id="footer">

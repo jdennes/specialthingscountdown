@@ -19,7 +19,8 @@ div#specialthing { font-size: 48px; letter-spacing: -3px; }
 div#specialthingadded { font-size: 12px; text-align: right; }
 div.special { font-size: 48px; letter-spacing: -3px; margin-top: 10px; }
 div.specialadded { font-size: 12px; text-align: right; }
-div#viewtoggle { margin-top: -30px; float: left; text-align: left; }
+div#viewtoggle { margin-top: -20px; float: left; text-align: left; }
+div#nav { margin: 6px 0 8px 0; }
 div#forward { float: right; }
 div#footer { font-size: 18px; margin-top: 18px; }
 div#love { height: 26px; float: right; text-align: right; }
@@ -29,3 +30,5 @@ a.pinkbutton { color:#fff; border: 1px solid #880036; background: none repeat sc
 a.pinkbutton:hover { background: none repeat scroll 0 0 #cc0051; text-decoration: none; }
 textarea { margin-bottom: 10px; width: 100%; height: 30px; font-size: 14px; color: #5c5c5c; font-family: helvetica, arial, sans-serif; padding: 3px; }
 div#message { display: none; float: right; text-align: right; }
+form#addspecialdayform { margin: 6px 0 20px 0; }
+input#specialdaydescription { width: 300px; }

@@ -25,6 +25,28 @@ var showMessage = function(message) {
   setTimeout(function(){ $("#message").fadeOut("slow"); }, 2500);
 };
 
+var addSpecialDay = function() {
+  if ($("#specialdaydescription").val().trim() == "") {
+    showMessage("You have to enter a description!");
+    return;
+  }
+  if ($("#specialdayactualdate").val().trim() == "") {
+    showMessage("You have to enter a valid date!");
+    return;
+  }
+  $.post("/day/add", $("#addspecialdayform").serialize(),
+    function(data) {
+      if (data.status) {
+        $("#specialdaydescription").val("");
+        $("#specialdayactualdate").val("");
+        $("#specialdaydate").val("");
+        window.location.replace("/");
+      } else {
+        showMessage(data.message);
+      }
+    });
+};
+
 var addSpecialThing = function() {
   if ($("#newthing").val().trim() == "") {
     showMessage("Your new special thing can't be empty!");
@@ -100,18 +122,3 @@ var toggleView = function() {
     $("#viewtoggle a").html("Show full list");
   }
 };
-
-$(document).ready(function() {
-  special_things = JSON.parse($("#specialthingsdata").html());
-  current_index = 0;
-  if (special_things.length > 0) {
-    $("#specialthing").html(special_things[current_index].thing);
-    $("#specialthingadded").html(special_things[current_index].added);
-  } else {
-    $("#nospecialthings").show();
-  }
-  $("div#viewtoggle a").click(function() { toggleView(); });
-  $("div#forward a").click(function() { forward(); });
-  $("div#back a").click(function() { back(); });
-  $("div#add a").click(function() { addSpecialThing(); });
-});

@@ -39,6 +39,25 @@ class MainHandler(webapp.RequestHandler):
       path = os.path.join(os.path.dirname(__file__), 'notallowed.html')
       self.response.out.write(template.render(path, {}))
 
+class AddSpecialDayHandler(webapp.RequestHandler):
+  def post(self):
+    user = users.get_current_user()
+    if user and is_trusted_user(user):
+      self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
+      try:
+        day_date = datetime.strptime(self.request.get("specialdayactualdate"), "%Y-%m-%d")
+        description = self.request.get("specialdaydescription")
+        day = SpecialDay(date=day_date, description=description, user=user)
+        day.put()
+        self.response.out.write(simplejson.dumps({ "status": True, 
+          "message": "Sweet! Your new special day was added." }))
+      except:
+        self.response.out.write(simplejson.dumps({ "status": False, 
+          "message": "Damn! There was a problem adding your special day. \
+          Please try again." }))
+    else:
+      self.redirect("/")
+
 class SpecialDayHandler(webapp.RequestHandler):
   def get(self, special_day_id=None):
     user = users.get_current_user()
@@ -98,6 +117,7 @@ def main():
     [('/', MainHandler),
     ('/day/(.*)/things', SpecialThingsHandler),
     ('/day/(.*)/add', AddSpecialThingHandler),
+    ('/day/add', AddSpecialDayHandler),
     ('/day/(.*)', SpecialDayHandler)], debug=True)
   util.run_wsgi_app(app)
 
