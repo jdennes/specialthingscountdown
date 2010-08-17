@@ -27,10 +27,10 @@ class MainHandler(webapp.RequestHandler):
   def get(self):
     user = users.get_current_user()
     if user and is_trusted_user(user):
-      special_days = [sd for sd in get_special_days()]
-      # TODO: Template expects special_days and past_special_days... split them up 
-      # and pass in them in separately
-      past_special_days = []
+      now = datetime.utcnow()
+      all_days = [d for d in get_special_days()]
+      special_days = [sd for sd in all_days if sd.date > now]
+      past_special_days = [psd for psd in all_days if psd.date <= now]
       path = os.path.join(os.path.dirname(__file__), 'index.html')
       self.response.out.write(template.render(path, 
         { 'version': MEDIA_VERSION, 'special_days': special_days, 
@@ -45,13 +45,11 @@ class SpecialDayHandler(webapp.RequestHandler):
     if user and is_trusted_user(user):
       day = SpecialDay.get(special_day_id)
       if day:
-        days = (day.date - datetime.utcnow()).days
         special_things = [{"thing": cgi.escape(t.thing), "added": t.added()} 
           for t in get_special_things(day=day)]
         path = os.path.join(os.path.dirname(__file__), 'specialday.html')
         self.response.out.write(template.render(path, 
-          { 'version': MEDIA_VERSION, 'day_id': special_day_id, 
-          'day': day.date.strftime('%d %b, %Y'), 'days': days, 'in_past': days < 0,
+          { 'version': MEDIA_VERSION, 'day': day,
           'special_things': simplejson.dumps(special_things) }))
       else:
         self.redirect('/')

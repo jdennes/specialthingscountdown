@@ -11,24 +11,32 @@
   </head>
   <body>
     <div id="container">
+      <div class="bigger">Counting down to special days (and special things) you're looking forward to...</div>
       {% if special_days %}
-      <div>Upcoming special days!</div>
       {% for sd in special_days %}
-      <div>Special day: <a href="/day/{{ sd.key }}">{{ sd.description }}</a></div>
+      <div class="listdaycount pink">{{ sd.days }}</div>
+      <div class="listdaysuntil">day{{ sd.days|pluralize }} until <span class="pink">{{ sd.pretty_date }}</span> when...<br />
+        <a href="/day/{{ sd.key }}">{{ sd.description }}</a>
+      </div>
+      <div class="clear"></div>
       {% endfor %}
       {% else %}
-      <div>It's very sad, because there aren't any upcoming special days... :|</div>
+      <div class="special">It's very sad, because there aren't any upcoming special days... :|</div>
       {% endif %}
       
       {% if past_special_days %}
-      <div>Past special days:</div>
+      <div class="bigger">There are some past special days {% if special_days %}too:{% else %}though!{% endif %}</div>
       {% for psd in past_special_days %}
-      <!-- Each past special day appears here -->
+      <div class="listdaycount pink">{{ psd.abs_days }}</div>
+      <div class="listdaysuntil">day{{ psd.abs_days|pluralize }} ago on <span class="pink">{{ psd.pretty_date }}</span> when...<br />
+        <a href="/day/{{ psd.key }}">{{ psd.description }}</a>
+      </div>
+      <div class="clear"></div>
       {% endfor %}
       {% endif %}
       <div id="footer">
         <div id="love">made with <a href="http://jdenn.es/" target="_new">&#9829;</a> </div>
-        <div>it's all about looking forward to special things! ^_^</div>
+        <div>It's all about looking forward to special things! ^_^</div>
       </div>
     </div>
   </body>

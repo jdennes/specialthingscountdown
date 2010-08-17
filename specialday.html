@@ -11,16 +11,17 @@
   </head>
   <body>
     <div id="container">
-      <div><a href="/">Back to the full list of special days</a></div>
-      {% if in_past %}
-      <div id="daypassed">This special day was <span class="pink">{{ day }}</span>!</div>
-      <div>The special things for that special day are below!</div>
+      <div class="bigger"><a href="/">Back to the full list of special days</a></div>
+      {% if day.in_past %}
+      <div id="daycount" class="pink">{{ day.abs_days }}</div>
+      <div id="daysuntil">day{{ day.days|pluralize }}<br />ago:</div>
+      <!--<div>Special things happened on <span class="pink">{{ day.pretty_date }}</span>!</div>-->
       {% else %}
-      <div id="daycount" class="pink">{{ days }}</div>
-      <div id="daysuntil">day{{ days|pluralize }}<br />until:</div>
+      <div id="daycount" class="pink">{{ day.days }}</div>
+      <div id="daysuntil">day{{ day.days|pluralize }}<br />until:</div>
       {% endif %}
       <div class="clear"></div>
-      <div id="viewtoggle"><a href="#">Show full list</a></div>
+      <div id="viewtoggle">Special things happen{% if day.in_past %}ed{% endif %}... <a href="#">Show full list</a></div>
       <div id="listview" style="display: none;"></div>
       <div id="normalview">
         <div id="nav">
@@ -32,19 +33,21 @@
         <div id="specialthingadded" class="pink"></div>
       </div>
       <div id="specialthingsdata">{{ special_things }}</div>
+      {% if not day.in_past %}
       <div style="margin: 20px 0 2px">Add a new special thing by entering it below!</div>
       <form id="addform">
-        <input id="specialdayid" name="specialdayid" type="hidden" value="{{ day_id }}" />
+        <input id="specialdayid" name="specialdayid" type="hidden" value="{{ day.key }}" />
         <textarea id="newthing" name="newthing"></textarea>
       </form>
       <div>
         <div id="message" class="pink"></div>
         <div id="add"><a class="pinkbutton" href="#">Add this special thing!</a></div>
       <div/>
+      {% endif %}
       <div class="clear"></div>
       <div id="footer">
         <div id="love">made with <a href="http://jdenn.es/" target="_new">&#9829;</a> </div>
-        <div>it's all about looking forward to special things! ^_^</div>
+        <div>It's all about looking forward to special things! ^_^</div>
       </div>
     </div>
   </body>

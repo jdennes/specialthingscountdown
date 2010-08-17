@@ -7,9 +7,12 @@ div#container { margin: 0 auto; width: 680px; overflow: hidden; position: relati
 .pink { color: #ff1170; }
 .blue { color: #2fc2ef; }
 .yell { color: #fef200; }
+div.bigger { font-size: 18px; margin: 10px 0; }
+div.listdaycount { font-size: 90px; line-height: 90px; font-weight: bold; float: left; margin-right: 6px; }
+div.listdaysuntil { font-size: 32px; font-weight: bold; line-height: 32px; margin-top: 14px; }
+div.listdaysuntil a { line-height: 44px; }
 div#nospecialthings { display: none; font-size: 48px; letter-spacing: -3px; }
 div#specialthingsdata { display: none; }
-div#daypassed { font-size: 80px; font-weight: bold; line-height: 80px; }
 div#daycount { font-size: 300px; line-height: 300px; font-weight: bold; float: left; }
 div#daysuntil { font-size: 140px; font-weight: bold; line-height: 140px; }
 div#specialthing { font-size: 48px; letter-spacing: -3px; }
