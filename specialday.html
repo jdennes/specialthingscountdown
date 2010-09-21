@@ -30,8 +30,7 @@
       <div class="bigger"><a href="/">Back to the full list of special days</a></div>
       {% if day.in_past %}
       <div id="daycount" class="pink">{{ day.abs_days }}</div>
-      <div id="daysuntil">day{{ day.days|pluralize }}<br />ago:</div>
-      <!--<div>Special things happened on <span class="pink">{{ day.pretty_date }}</span>!</div>-->
+      <div id="daysuntil">day{{ day.abs_days|pluralize }}<br />ago:</div>
       {% else %}
       <div id="daycount" class="pink">{{ day.days }}</div>
       <div id="daysuntil">day{{ day.days|pluralize }}<br />until:</div>
